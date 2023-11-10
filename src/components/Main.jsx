@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import AlbumCard from "./AlbumCard";
 import { useState, useEffect } from "react";
 import MainNavbar from "./MainNavbar";
@@ -41,8 +40,6 @@ const Main = () => {
   });
 
   const handleArtist = async (artistName, domQuerySelector) => {
-    // artistName = "eminem", "metallica", etc...
-    // domQuerySelector = "#rockSection" etc...
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
@@ -51,10 +48,10 @@ const Main = () => {
           method: "GET",
           headers,
         }
-      ); // gets the information
+      );
       if (response.ok) {
         let result = await response.json();
-        console.log("result", result); // transforms the response to json
+        console.log("result", result);
         let songInfo = result.data; //array di oggetti
         console.log("handle artist song info:", songInfo[0], typeof songInfo);
         setAlbums((albums) => [...albums, songInfo[0]]);
@@ -71,14 +68,12 @@ const Main = () => {
     let MetalRandomArtists = [];
     let BluesRandomArtists = [];
 
-    document.querySelector("#searchField").value = ""; // empties search field on page load
+    document.querySelector("#searchField").value = "";
 
     while (rockRandomArtists.length < 4) {
-      // pushes elements inside the array until it has 4 strings
-      let artist = rockArtists[Math.floor(Math.random() * rockArtists.length)]; // select an element from the array with an index between 0 and 7
+      let artist = rockArtists[Math.floor(Math.random() * rockArtists.length)];
       if (!rockRandomArtists.includes(artist)) {
-        // checks if the artist is not already present in the array
-        rockRandomArtists.push(artist); // pushes the artist in the array
+        rockRandomArtists.push(artist);
       }
     }
 
